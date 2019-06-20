@@ -16,6 +16,10 @@ app.get('/', (req, res) => {
     res.render('index.ejs');
 });
 
+app.get('/test', (req, res) => {
+    res.render('index.ejs');
+});
+
 app.listen(port, () => {
     console.log('server listening on port' + port);
 });
