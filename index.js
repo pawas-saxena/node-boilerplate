@@ -1,19 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
-const port = '3000';
+const config = require('config');
 
-app.use(bodyParser.urlencoded({extended : false}));
+const app = express();
+const port = config.get('port');
+
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
 app.set('view engine', 'ejs');
 
 app.use(express.static(__dirname + '/staticFiles'));
 
-app.get('/', (req , res)=>{
+app.get('/', (req, res) => {
     res.render('index.ejs');
 });
 
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log('server listening on port' + port);
 });
