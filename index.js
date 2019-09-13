@@ -6,13 +6,7 @@ const testController = require('./controllers/test.controller');
 const app = express();
 const port = config.get('port');
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(express.json());
-
-app.set('view engine', 'ejs');
-
-app.use(express.static(__dirname + '/staticFiles'));
+require('./utils/init.util')(app);
 
 app.get('/', (req, res) => {
     res.render('index.ejs');
