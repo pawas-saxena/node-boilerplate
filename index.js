@@ -1,10 +1,8 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const config = require('config');
+const {testRouter} = require('./routers');
 
-const testController = require('./controllers/test.controller');
 const app = express();
-const port = config.get('port');
 
 require('./utils/init.util')(app);
 
@@ -12,14 +10,9 @@ app.get('/', (req, res) => {
     res.render('index.ejs');
 });
 
-app.post('/postTest', (req, res) => {
-    testController.postTest(req, res);
-});
+app.use('/test', testRouter);
 
-app.get('/test', (req, res) => {
-    res.render('index.ejs');
-});
-
-app.listen(port, (err) => {
-    console.log('server listening on port' + port);
+// we will require db config here. Wait for DB connection to open and them start the server after connection success
+app.listen(config.get('port'), (err) => {
+    console.log('server listening on port' + config.get('port'));
 });
